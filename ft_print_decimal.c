@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:18:57 by sruff             #+#    #+#             */
-/*   Updated: 2023/11/15 18:00:36 by sruff            ###   ########.fr       */
+/*   Updated: 2023/11/19 19:26:20 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	checkdigits(int digit, long nbr, char *numstr)
 	return (digit);
 }
 
-int	print_decimal(int n)
+int	print_decimal(long n)
 {
 	long			nbr;
 	char			numstr[21];

@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:16:50 by sruff             #+#    #+#             */
-/*   Updated: 2023/11/15 20:17:19 by sruff            ###   ########.fr       */
+/*   Updated: 2023/11/19 20:12:31 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@
 
 int	print_char(int c)
 {
-	return (write(1, &c, 1));
+	if ((write(1, &c, 1)) < 0)
+		return (-1);
+	else
+		return (1);
 }
 
 int	print_str(const char *str)
@@ -53,6 +56,9 @@ int	print_str(const char *str)
 
 static int	check_type(const char *str, va_list args)
 {
+	char	*hex;
+
+	hex = "0123456789abcdef";
 	if (*str == 'c')
 		return (print_char(va_arg(args, int)));
 	else if (*str == 's')
@@ -62,16 +68,18 @@ static int	check_type(const char *str, va_list args)
 	else if (*str == 'i')
 		return (print_decimal(va_arg(args, int)));
 	else if (*str == 'X')
-		return (print_hex(va_arg(args, int), "0123456789ABCDEF"));
+		return (print_hex(va_arg(args, unsigned int), "0123456789ABCDEF", 0));
 	else if (*str == 'x')
-		return (print_hex(va_arg(args, int), "0123456789abcdef"));
+		return (print_hex(va_arg(args, unsigned int), "0123456789abcdef", 0));
 	else if (*str == 'u')
 		return (print_decimal(va_arg(args, unsigned int)));
 	else if (*str == 'p')
-		return (print_pointer(va_arg(args, void *)));
+	{
+		print_str("0x");
+		return (print_void((unsigned long)(va_arg(args, void *)), hex, 0) + 2);
+	}
 	else
 		return (print_char('%'));
-	return (-1);
 }
 
 int	ft_printf(const char *str, ...)
@@ -81,7 +89,6 @@ int	ft_printf(const char *str, ...)
 
 	counter = 0;
 	va_start(args, str);
-
 	while (*str)
 	{
 		if (*str == '%')
@@ -90,14 +97,17 @@ int	ft_printf(const char *str, ...)
 			counter += write (1, str, 1);
 		str++;
 	}
-	return counter;
+	return (counter);
 }
 
 //int main(void)
 //{
-	//ft_printf("Print this -> %c\nand this: %c\n", '$', '#');
-	//ft_printf("Print this -> %s\nand this: %s\n", "", "");
-	//ft_printf("Print this -> %c\nand this: %c\n", '$', '#');
-	//ft_printf("Print this -> %d\nand this: %d\n", -1234, 1234);
+//	//ft_printf("Print this -> %c\nand this: %c\n", '$', '#');
+//	//ft_printf("Print this -> %s\nand this: %s\n", "", "");
+//	//ft_printf("Print this -> %c\nand this: %c\n", '$', '#');
+//	//ft_printf("Print this -> %d\nand this: %d\n", -1234, 1234);
+
+//	printf("\n\n\n");
+
 //	return 0;
 //}
