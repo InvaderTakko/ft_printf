@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:16:50 by sruff             #+#    #+#             */
-/*   Updated: 2023/11/19 20:12:31 by sruff            ###   ########.fr       */
+/*   Updated: 2023/11/20 20:53:53 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,13 @@ int	print_str(const char *str)
 		return (print_str("(null)"));
 	while (*str)
 	{
-		counter += write(1, str, 1);
-		str++;
+		if ((write(1, str, 1)) < 0)
+			return ((-1));
+		else
+		{
+			counter++;
+			str++;
+		}
 	}
 	return (counter);
 }
@@ -75,8 +80,7 @@ static int	check_type(const char *str, va_list args)
 		return (print_decimal(va_arg(args, unsigned int)));
 	else if (*str == 'p')
 	{
-		print_str("0x");
-		return (print_void((unsigned long)(va_arg(args, void *)), hex, 0) + 2);
+		return (print_void((unsigned long)(va_arg(args, void *)), hex, 0));
 	}
 	else
 		return (print_char('%'));
@@ -86,15 +90,26 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		counter;
+	int		temp;
 
 	counter = 0;
 	va_start(args, str);
 	while (*str)
 	{
 		if (*str == '%')
-			counter += check_type(++str, args);
+		{
+			temp = check_type(++str, args);
+			if (temp < 0)
+				return ((-1));
+			counter += temp;
+		}
 		else
-			counter += write (1, str, 1);
+		{
+			temp = write (1, str, 1);
+			if (temp < 0)
+				return ((-1));
+			counter += temp;
+		}
 		str++;
 	}
 	return (counter);
@@ -105,7 +120,8 @@ int	ft_printf(const char *str, ...)
 //	//ft_printf("Print this -> %c\nand this: %c\n", '$', '#');
 //	//ft_printf("Print this -> %s\nand this: %s\n", "", "");
 //	//ft_printf("Print this -> %c\nand this: %c\n", '$', '#');
-//	//ft_printf("Print this -> %d\nand this: %d\n", -1234, 1234);
+//	ft_printf("Print this -> %d\nand this: %d\n", -1234, 1234);
+//	ft_printf("Print this -> %x\nand this: %d\n", -1, 1234);
 
 //	printf("\n\n\n");
 

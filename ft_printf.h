@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 17:08:02 by sruff             #+#    #+#             */
-/*   Updated: 2023/11/19 20:04:04 by sruff            ###   ########.fr       */
+/*   Updated: 2023/11/20 20:42:58 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	print_decimal(long n);
 int	print_char(int c);
 int	print_str(const char *str);
 int	print_hex(unsigned int number, char *hexset, int counter);
+int	loop(unsigned long n, char *base, int counter);
 int	print_void(unsigned long n, char *base, int counter);
-int	print_hexFR(long n, char *base);
+//int	print_hexFR(long n, char *base);
 int	ft_printf(const char *str, ...);
 
 #endif
