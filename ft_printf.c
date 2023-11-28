@@ -6,30 +6,14 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:16:50 by sruff             #+#    #+#             */
-/*   Updated: 2023/11/20 20:53:53 by sruff            ###   ########.fr       */
+/*   Updated: 2023/11/28 18:21:41 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdarg.h>
+//#include <stdio.h>
+//#include <unistd.h>
+//#include <stdarg.h>
 #include "ft_printf.h"
-
-//void	example_function(int fixed_param, ...)
-//{
-//	va_list args;
-//	va_start(args, fixed_param);
-//	int value = va_arg(args, int);
-//	printf("Fixed param: %d\n", fixed_param);
-//	printf("Variable argument: %d\n", value);
-//	//va_arg(args, int);
-//	printf("Variable argument: %d\n", 1 + va_arg(args, int));
-//	va_end(args);
-//}
-//int main() {
-//    example_function(10, 42, 123);
-//    return 0;
-//}
 
 int	print_char(int c)
 {
